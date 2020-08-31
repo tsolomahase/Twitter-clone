@@ -4,7 +4,8 @@ class TweeetsController < ApplicationController
   # GET /tweeets
   # GET /tweeets.json
   def index
-    @tweeets = Tweeet.all
+    @tweeets = Tweeet.all.order("created_at DESC")
+    @tweeet = Tweeet.new
   end
 
   # GET /tweeets/1
@@ -12,6 +13,13 @@ class TweeetsController < ApplicationController
   def show
   end
 
+  class TweeetsController < ActionController::Base
+    before_filter:initialize_user
+
+    def initialize_user
+      @tweeet = Tweeet.new
+    end
+  end
   # GET /tweeets/new
   def new
     @tweeet = Tweeet.new
@@ -20,6 +28,7 @@ class TweeetsController < ApplicationController
   # GET /tweeets/1/edit
   def edit
   end
+
 
   # POST /tweeets
   # POST /tweeets.json
@@ -36,7 +45,6 @@ class TweeetsController < ApplicationController
       end
     end
   end
-
   # PATCH/PUT /tweeets/1
   # PATCH/PUT /tweeets/1.json
   def update
