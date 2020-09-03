@@ -1,6 +1,5 @@
-<h3>Confirmation</h3>
-<%= form_with(model: @tweeet, url: tweeets_path, local:true) do |form| %>
-
+<h3> Confirmation </h3>
+<%= form_with(model: @tweeet, url: new_tweeet_path, local:true, method: 'get') do |form| %>
     <%= form.hidden_field :tweeet %>
     <p>Your Tweet: <%= @tweeet.tweeet %></p>
   <%= form.submit  "Submit" %>

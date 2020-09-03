@@ -12,7 +12,7 @@ class TweeetsController < ApplicationController
   end
 
   def new
-    if params [:back]
+    if params[:back]
       @tweeet = Tweeet.new(tweeet_params)
     else
       @tweeet = Tweeet.new
@@ -36,10 +36,11 @@ class TweeetsController < ApplicationController
       end
     end
   end
-  def confirm_pg
+  def confirm
         @tweeet = Tweeet.new(tweeet_params)
         render :new if @tweeet.invalid?
       end
+
       def back
         @tweeet = Tweeet.edit(tweeet_params)
         render :choose_new_or_edit if @tweeet.invalid?
