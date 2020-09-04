@@ -1,12 +1,9 @@
 class TweeetsController < ApplicationController
-  before_action :set_tweeet, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_tweeet, only: [:show, :edit, :update, :destroy,]
 
   def index
     @tweeets = Tweeet.all.order("created_at DESC")
-    @tweeet = Tweeet.new
   end
-
 
   def show
   end
@@ -22,7 +19,6 @@ class TweeetsController < ApplicationController
   def edit
   end
 
-
   def create
     @tweeet = Tweeet.new(tweeet_params)
 
@@ -36,20 +32,19 @@ class TweeetsController < ApplicationController
       end
     end
   end
+
   def confirm
-        @tweeet = Tweeet.new(tweeet_params)
-        render :new if @tweeet.invalid?
-      end
-
-      def back
-        @tweeet = Tweeet.edit(tweeet_params)
-        render :choose_new_or_edit if @tweeet.invalid?
-      end
-
+      @tweeet = Tweeet.new(tweeet_params)
+      render :new if @tweeet.invalid?
+    end
+    def back
+      @tweeet = Tweeet.edit(tweeet_params)
+      render :choose_new_or_edit if @tweeet.invalid?
+    end
   def update
     respond_to do |format|
       if @tweeet.update(tweeet_params)
-        format.html { redirect_to @tweeet, notice: 'Tweeet was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Tweeet was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweeet }
       else
         format.html { render :edit }
@@ -57,7 +52,6 @@ class TweeetsController < ApplicationController
       end
     end
   end
-
 
   def destroy
     @tweeet.destroy
@@ -68,12 +62,11 @@ class TweeetsController < ApplicationController
   end
 
   private
+  def set_tweeet
+    @tweeet = Tweeet.find(params[:id])
+  end
 
-    def set_tweeet
-      @tweeet = Tweeet.find(params[:id])
-    end
-
-    def tweeet_params
-      params.require(:tweeet).permit(:tweeet)
-    end
+  def tweeet_params
+    params.require(:tweeet).permit(:tweeet)
+  end
 end

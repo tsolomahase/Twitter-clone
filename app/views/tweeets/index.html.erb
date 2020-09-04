@@ -1,10 +1,13 @@
-<section class="section">
-  <div class="container">
-    <div class="columns">
-      <%= render 'trends' %>
-      <%= render 'feed' %>
-      <%= render 'who-to-follow' %>
-    </div>
-  </div>
-  <body>
-</section>
+<h1>Tweets</h1>
+    <% @tweeets.each do |tweeet| %>
+      <hr>
+        <div>
+          <%= tweeet.tweeet %>
+        </div>
+        <div>
+          <%= link_to 'Post', tweeet %>
+          <%= link_to 'Edit', edit_tweeet_path(tweeet) %>
+          <%= link_to 'Destroy', tweeet, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+    <% end %>
+<br>
